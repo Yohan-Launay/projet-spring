@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<!--  appel du fragment layout avec les paramètre -->
+<html data-th-replace="~{layouts/layout :: frag-layout
+						(title= ~{:: title},
+						content= ~{::main} )}">
+
+<!--  tire passé en paramètre -->
+<title>Accueil</title>
+
+<!--  contenu passé en paramètre -->
+<main>
+    <div class="container">
+        <h1 class="titre-index">Liste des enchères</h1>
+        <tr data-th-each="item : ${items}">
+            <td data-th-text="${item.name}">
+            <td><a data-th-href="@{/houses/details(id=${item.id})}">Details</a></td>
+        </tr>
+    </div>
+</main>
+
+</html>

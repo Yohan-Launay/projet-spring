@@ -1,0 +1,23 @@
+<html data-th-fragment="frag-layout(title, content)">
+<head>
+    <meta charset="utf8">
+    <!--  la abalise sera remplacée par le contenu de title -->
+    <title data-th-replace="${title}"></title>
+</head>
+<body>
+<header>
+    <h1>ENI encheres</h1>
+    <a href="/"><h1 id="nav-title">ENI encheres</h1></a>
+    <nav class = "nav-menu">
+
+    </nav>
+</header>
+
+<main data-th-replace="${content}"></main>
+
+<footer>
+    <p>&copy; ENI - all right reserved</p>
+</footer>
+<!--<div data-th-text="${#authentication.getPrincipal()}"></div>-->
+</body>
+</html>
