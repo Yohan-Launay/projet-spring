@@ -2,7 +2,6 @@ package fr.eni.projet.spring.dal.retrait;
 
 import fr.eni.projet.spring.bo.Retrait;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 

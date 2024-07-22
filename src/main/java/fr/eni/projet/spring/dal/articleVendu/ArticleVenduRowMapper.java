@@ -2,7 +2,6 @@ package fr.eni.projet.spring.dal.articleVendu;
 
 import fr.eni.projet.spring.bo.ArticleVendu;
 import fr.eni.projet.spring.bo.Categorie;
-import fr.eni.projet.spring.bo.Utilisateur;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

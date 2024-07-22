@@ -1,11 +1,8 @@
 package fr.eni.projet.spring.dal.categorie;
 
-import fr.eni.projet.spring.bo.ArticleVendu;
 import fr.eni.projet.spring.bo.Categorie;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

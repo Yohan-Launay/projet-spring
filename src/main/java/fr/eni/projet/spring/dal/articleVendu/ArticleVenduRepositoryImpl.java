@@ -2,10 +2,8 @@ package fr.eni.projet.spring.dal.articleVendu;
 
 import fr.eni.projet.spring.bo.ArticleVendu;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import java.util.List;
 
