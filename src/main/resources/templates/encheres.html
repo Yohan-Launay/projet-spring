@@ -9,13 +9,20 @@
 <title>Accueil</title>
 
 <!--  contenu passé en paramètre -->
-<main>
-    <div class="container">
+<main class="wrapper">
+    <div >
         <h1 class="titre-index">Liste des enchères</h1>
-        <tr data-th-each="item : ${items}">
-            <td data-th-text="${item.nom_article}">
-            <td><a data-th-href="@{/houses/details(id=${item.no_article})}">Details</a></td>
-        </tr>
+        <div class="flex">
+            <div data-th-each="item : ${articles}" class="m-2 w-100">
+                <a data-th-href="@{/houses/details(id=${item.no_article})}" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" data-th-text="${item.nom_article}"></h5>
+                    <p class="font-normal text-gray-700 dark:text-gray-400" data-th-text="${item.description}"></p>
+                    <div>Prix: <span class="font-normal text-gray-700 dark:text-gray-400" data-th-text="${item.prix_initial}"></span> euros</div>
+                    <div>Fin de l'enchère: <span class="font-normal text-gray-700 dark:text-gray-400" data-th-text="${item.date_fin_encheres}"></span></div>
+                    <div>Vendeur: <span class="font-normal text-gray-700 dark:text-gray-400" data-th-text="${item.utilisateur.pseudo}"></span></div>
+                </a>
+            </div>
+        </div>
     </div>
 </main>
 

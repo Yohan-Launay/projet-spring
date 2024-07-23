@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html data-th-replace="~{layouts/layout :: frag-layout
+						(title= ~{:: title},
+						content= ~{::main} )}">
+
+<title>Vendre</title>
+
+<main class="center-main">
+    <div class="container">
+        <form class="max-w-sm mx-auto" data-th-action="@{/add-article}" method="post" data-th-object="${articleVendu}"
+              enctype="multipart/form-data">
+            <h1 class="titre-index">Vendre un article </h1>
+            <div class="mb-5">
+                <label for="nom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom de l'article</label>
+                <input type="nom" id="nom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Calculatrice" required />
+            </div>
+            <div class="mb-5">
+                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                <input type="description" id="description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Je suis une calculatrice" required />
+            </div>
+            <div class="mb-5">
+                <label for="idCategorie" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selectionner une catégorie</label>
+                <select id="idCategorie" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                </select>
+            </div>
+            <div class="mb-5">
+                <label for="idDateDebut" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Debut de l'enchere</label>
+                <input id="idDateDebut"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="date">
+            </div>
+            <div class="mb-5">
+                <label for="idDateFin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fin de l'enchere</label>
+                <input id="idDateFin"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="date">
+            </div>
+            <div class="mb-5">
+                <label for="idPrixInit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prix initial</label>
+                <input type="text" id="idPrixInit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="100" required />
+            </div>
+            <div class="container-form-user">
+                <h2>Retrait</h2>
+                <div class="mb-5">
+                    <label for="idRue" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rue</label>
+                    <input data-th-field="${utilisateur.rue}" id="idRue" type="text" data-th-value="${retrait.rue}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+                <div class="mb-5">
+                    <label for="idCodePostal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Code Postal</label>
+                    <input data-th-field="${utilisateur.code_postal}" name="code_postal" id="idCodePostal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           type="text"
+                           data-th-value="${retrait.code_postal}">
+                </div>
+                <div class="mb-5">
+                    <label for="idVille" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ville</label>
+                    <input data-th-field="${utilisateur.ville}" id="idVille" type="text"
+                           data-th-value="${retrait.ville}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+            </div>
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Vendre</button>
+        </form>
+
+    </div>
+</main>
+</html>
