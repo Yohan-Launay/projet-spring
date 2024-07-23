@@ -25,13 +25,11 @@ public class ArticleVenduRowMapper implements RowMapper<ArticleVendu> {
         articleVendu.setPrix_initial(rs.getInt("prix_initial"));
         articleVendu.setPrix_vente(rs.getInt("prix_vente"));
 
-
         Categorie categorie = new Categorie();
         categorie.setNo_categorie(rs.getInt("no_categorie"));
         categorie.setLibelle(rs.getString("libelle"));
 
         articleVendu.setCategorie(categorie);
-
 
         return articleVendu;
     }

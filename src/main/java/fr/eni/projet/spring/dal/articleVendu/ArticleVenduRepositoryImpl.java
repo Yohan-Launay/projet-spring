@@ -32,7 +32,14 @@ public class ArticleVenduRepositoryImpl implements ArticleVenduRepository {
 
     @Override
     public List<ArticleVendu> findAll() {
-        return List.of();
+        String sql = "SELECT a.no_article AS id_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, " +
+                "u.no_utilisateur, u.pseudo, u.nom, u.prenom, u.email, u.telephone, u.rue, u.code_postal, u.ville, u.mot_de_passe, u.credit, u.administrateur, " +
+                "c.no_categorie, c.libelle " +
+                "FROM ARTICLES_VENDUS a " +
+                "INNER JOIN CATEGORIES c ON a.no_categorie = c.no_categorie " +
+                "INNER JOIN UTILISATEURS u ON a.no_utilisateur = u.no_utilisateur";
+        List<ArticleVendu> list = jdbcTemplate.query(sql, new ArticleVenduRowMapper());
+        return list;
     }
 
     @Override

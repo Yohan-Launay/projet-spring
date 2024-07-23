@@ -13,8 +13,8 @@
     <div class="container">
         <h1 class="titre-index">Liste des enchères</h1>
         <tr data-th-each="item : ${items}">
-            <td data-th-text="${item.name}">
-            <td><a data-th-href="@{/houses/details(id=${item.id})}">Details</a></td>
+            <td data-th-text="${item.nom_article}">
+            <td><a data-th-href="@{/houses/details(id=${item.no_article})}">Details</a></td>
         </tr>
     </div>
 </main>
