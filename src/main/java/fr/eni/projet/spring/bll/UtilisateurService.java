@@ -20,10 +20,10 @@ public class UtilisateurService {
     private ArticleVenduService articleVenduService;
 
     public UtilisateurService(PasswordEncoder encoderBean, UtilisateurRepository utilisateurRepository, EnchereService enchereService, ArticleVenduService articleVenduService, RetraitService retraitService) {
-        this.encoderBean = encoderBean;
         this.utilisateurRepository = utilisateurRepository;
         this.enchereService = enchereService;
         this.articleVenduService = articleVenduService;
+        this.encoderBean = encoderBean;
     }
 
     public void registerUtilisateur(Utilisateur utilisateur) {
@@ -33,7 +33,7 @@ public class UtilisateurService {
 
         utilisateur.setMot_de_passe(encryptedPassword);
         utilisateur.setAdministrateur(false);
-        utilisateur.setCredit(0);
+        utilisateur.setCredit(10);
 
         utilisateurRepository.save(utilisateur);
     }
@@ -77,12 +77,12 @@ public class UtilisateurService {
         }
     }
 
-//    public void deleteUtilisateur(int id) {
-//
-//        enchereService.deleteEnchereByUserId(id);
-//        articleVenduService.deleteArticlesVenduByUserId(id);
-//        utilisateurRepository.deleteById(id);
-//    }
+    public void deleteUtilisateur(int id) {
+
+        enchereService.deleteEnchereByUserId(id);
+        articleVenduService.deleteArticlesVenduByUserId(id);
+        utilisateurRepository.deleteById(id);
+    }
 
     public void changeCredit(int id,int credit) {
         utilisateurRepository.changeCredit(id, credit);

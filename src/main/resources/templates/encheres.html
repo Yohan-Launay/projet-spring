@@ -12,9 +12,9 @@
 <main class="wrapper">
     <div >
         <h1 class="titre-index">Liste des enchères</h1>
-        <div class="flex">
+        <div class="flex flex-wrap">
             <div data-th-each="item : ${articles}" class="m-2 w-100">
-                <a data-th-href="@{/houses/details(id=${item.no_article})}" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <a data-th-href="@{/article(id=${item.no_article})}" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white" data-th-text="${item.nom_article}"></h5>
                     <p class="font-normal text-gray-700 dark:text-gray-400" data-th-text="${item.description}"></p>
                     <div>Prix: <span class="font-normal text-gray-700 dark:text-gray-400" data-th-text="${item.prix_initial}"></span> euros</div>

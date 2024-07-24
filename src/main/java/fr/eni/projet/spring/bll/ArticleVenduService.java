@@ -43,4 +43,15 @@ public class ArticleVenduService {
         articleVenduRepository.deleteById(id);
     }
 
+    public void deleteArticlesVenduByUserId(int userId) {
+        List<ArticleVendu> userArticles = articleVenduRepository.getArticlesVenduByUser(userId);
+        for (ArticleVendu articleVendu : userArticles) {
+            List<Enchere> enchereList = enchereService.getEnchereByArticle(articleVendu.getNo_article());
+            for(Enchere enchere : enchereList) {
+                enchereService.deleteEnchere(enchere.getNo_enchere());
+            }
+        }
+        articleVenduRepository.deleteByIdUtilisateur(userId);
+    }
+
 }

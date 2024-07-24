@@ -23,9 +23,7 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepository {
 
     @Override
     public List<Utilisateur> findAll() {
-
         String sql = "select * from utilisateurs";
-
         List<Utilisateur> list = jdbcTemplate.query(sql, new UtilisateurRowMapper());
 
         return list;
@@ -33,12 +31,9 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepository {
 
     @Override
     public Utilisateur findById(int id) {
-
         String sql = "select no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, active from UTILISATEURS where no_utilisateur = :id;";
-
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id", id);
-
         Utilisateur utilisateur = namedParameterJdbcTemplate.queryForObject(sql, map, new UtilisateurRowMapper());
 
         return utilisateur;
@@ -46,12 +41,9 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepository {
 
     @Override
     public void save(Utilisateur utilisateur) {
-
         GeneratedKeyHolder key = new GeneratedKeyHolder();
-
         String sql = "insert into UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) " +
                 "values (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur);";
-
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("pseudo", utilisateur.getPseudo());
         map.addValue("nom", utilisateur.getNom());
@@ -75,9 +67,7 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepository {
 
     @Override
     public void deleteById(int id) {
-
         String sql = "delete from UTILISATEURS where no_utilisateur = :id;";
-
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id", id);
 
@@ -86,11 +76,9 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepository {
 
     @Override
     public void update(Utilisateur utilisateur) {
-
         String sql = "update UTILISATEURS " +
                 "set pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, rue = :rue, code_postal = :code_postal, ville = :ville, mot_de_passe = :mot_de_passe " +
                 "where no_utilisateur = :id;";
-
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("pseudo", utilisateur.getPseudo());
         map.addValue("nom", utilisateur.getNom());
@@ -109,10 +97,8 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepository {
     @Override
     public Utilisateur findByEmail(String email) {
         String sql = "select no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, active from UTILISATEURS where email = :email;";
-
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("email", email);
-
         Utilisateur utilisateur = namedParameterJdbcTemplate.queryForObject(sql, map, new UtilisateurRowMapper());
 
         return utilisateur;
@@ -130,10 +116,8 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepository {
     @Override
     public List<Role> findRolesByUsername(String username) {
         String sql = "select email, role, id from ROLES where email = :emailUtilisateur;";
-
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("emailUtilisateur", username);
-
         List<Role> list = namedParameterJdbcTemplate.query(sql, map, new RoleRowMapper());
 
         return list;
@@ -141,9 +125,7 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepository {
 
     @Override
     public void desactivateById(int id) {
-
         String sql = "update UTILISATEURS set active = 0 where no_utilisateur = :id;";
-
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id", id);
 
@@ -152,9 +134,7 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepository {
 
     @Override
     public void activateById(int id) {
-
         String sql = "update UTILISATEURS set active = 1 where no_utilisateur = :id;";
-
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id", id);
 
@@ -163,9 +143,7 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepository {
 
     @Override
     public void saveNewPassword(int id, String password) {
-
         String sql = "update UTILISATEURS set mot_de_passe = :mot_de_passe where no_utilisateur = :id;";
-
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("mot_de_passe", password);
         map.addValue("id", id);

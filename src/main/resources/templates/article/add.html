@@ -8,34 +8,36 @@
 
 <main class="center-main">
     <div class="container">
-        <form class="max-w-sm mx-auto" data-th-action="@{/add-article}" method="post" data-th-object="${articleVendu}"
+        <form class="max-w-sm mx-auto" data-th-action="@{add}" method="post" data-th-object="${articleVendu}"
               enctype="multipart/form-data">
             <h1 class="titre-index">Vendre un article </h1>
             <div class="mb-5">
-                <label for="nom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom de l'article</label>
-                <input type="nom" id="nom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Calculatrice" required />
+                <label for="idNomArticle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nom de l'article</label>
+                <input type="text" id="idNomArticle" data-th-field="*{nom_article}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Calculatrice" required />
             </div>
             <div class="mb-5">
-                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                <input type="description" id="description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Je suis une calculatrice" required />
+                <label for="idDescription" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                <input type="text" id="idDescription" data-th-field="*{description}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Je suis une calculatrice" required />
             </div>
             <div class="mb-5">
                 <label for="idCategorie" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selectionner une catégorie</label>
-                <select id="idCategorie" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-
+                <select id="idCategorie" data-th-field="*{categorie.no_categorie}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option data-th-each="item : ${categories}"
+                            data-th-text="${item.libelle}"
+                            data-th-value="${item.no_categorie}"></option>
                 </select>
             </div>
             <div class="mb-5">
                 <label for="idDateDebut" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Debut de l'enchere</label>
-                <input id="idDateDebut"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="date">
+                <input id="idDateDebut" data-th-field="*{date_debut_encheres}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="date">
             </div>
             <div class="mb-5">
                 <label for="idDateFin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fin de l'enchere</label>
-                <input id="idDateFin"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="date">
+                <input id="idDateFin" data-th-field="*{date_fin_encheres}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="date">
             </div>
             <div class="mb-5">
                 <label for="idPrixInit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prix initial</label>
-                <input type="text" id="idPrixInit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="100" required />
+                <input type="text" id="idPrixInit" data-th-field="*{prix_initial}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="100" required />
             </div>
             <div class="container-form-user">
                 <h2>Retrait</h2>

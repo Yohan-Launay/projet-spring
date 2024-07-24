@@ -1,5 +1,7 @@
 package fr.eni.projet.spring.securite;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,13 +23,24 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final String SELECT_USER = "select email, mot_de_passe, active from UTILISATEURS where email = ?";
+    protected final Log logger = LogFactory.getLog(getClass());
+    private final String SELECT_USER = "select email, mot_de_passe, 1 from UTILISATEURS where email = ?";
     private final String SELECT_ROLES = "select email, role from ROLES where email = ?";
-//    private static UserDetailsService userService;
-//
-//    public SecurityConfig(UserDetailsService userService) {
-//        this.userService = userService;
-//    }
+    private static UserDetailsService userService;
+
+    public SecurityConfig(UserDetailsService userService) {
+        this.userService = userService;
+    }
+
+    @Bean
+    public static PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+    }
 
     @Bean
     UserDetailsManager userDetailsManager(DataSource dataSource) {
@@ -39,42 +52,30 @@ public class SecurityConfig {
     }
 
     @Bean
-    public static PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-//
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
-//    }
-
-
-
-    @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> {
             //On donne accès à la reque^te de type Get /security
             auth.requestMatchers(HttpMethod.GET, "/encheres").permitAll();
             auth.requestMatchers(HttpMethod.GET, "/register").permitAll();
-            auth.requestMatchers(HttpMethod.GET, "/search-article").permitAll();
+//            auth.requestMatchers(HttpMethod.GET, "/search-article").permitAll();
             auth.requestMatchers(HttpMethod.POST, "/register").permitAll();
-            auth.requestMatchers(HttpMethod.POST, "/search-article").permitAll();
+//            auth.requestMatchers(HttpMethod.POST, "/search-article").permitAll();
             auth.requestMatchers(HttpMethod.GET, "/css/*").permitAll();
-            auth.requestMatchers(HttpMethod.GET, "/images/*").permitAll();
-            auth.requestMatchers(HttpMethod.GET, "/uploads/*").permitAll();
-            auth.requestMatchers(HttpMethod.GET, "/js/*").permitAll();
-            auth.requestMatchers(HttpMethod.GET, "/forget-password").permitAll();
-            auth.requestMatchers(HttpMethod.POST, "/forget-password/change-password").permitAll();
+
+//            auth.requestMatchers(HttpMethod.GET, "/images/*").permitAll();
+//            auth.requestMatchers(HttpMethod.GET, "/uploads/*").permitAll();
+//            auth.requestMatchers(HttpMethod.GET, "/js/*").permitAll();
+//            auth.requestMatchers(HttpMethod.GET, "/forget-password").permitAll();
+//            auth.requestMatchers(HttpMethod.POST, "/forget-password/change-password").permitAll();
             auth.anyRequest().authenticated();
             //auth.anyRequest().denyAll();
         });
 
-        //Gestion automatique du login
-//        http.formLogin(Customizer.withDefaults());
-
         //Gestion du login avec un fichier login.html
         http.formLogin(form -> {
-            form.loginPage("/login").permitAll().defaultSuccessUrl("/").failureUrl("/login-error");
+            form.loginPage("/login").permitAll();
+            form.failureUrl("/login-error").permitAll();
+            form.defaultSuccessUrl("/").permitAll();
         });
 
         http.logout(logout -> {
@@ -90,8 +91,6 @@ public class SecurityConfig {
                     //permission d'accès à tout le monde
                     .permitAll();
         });
-
-
 
         return http.build();
     }
